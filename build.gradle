@@ -38,7 +38,7 @@ repositories{
 
 }
 
-version = '1.8'
+version = '1.9'
 group = 'com.github.L_Ender' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lionfishapi'
 

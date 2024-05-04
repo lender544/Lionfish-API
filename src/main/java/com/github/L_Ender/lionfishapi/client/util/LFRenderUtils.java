@@ -13,7 +13,7 @@ public class LFRenderUtils {
     public static void matrixStackFromModel(PoseStack matrixStack, AdvancedModelBox AdvancedModelBox) {
         AdvancedModelBox parent = AdvancedModelBox.getParent();
         if (parent != null) matrixStackFromModel(matrixStack, parent);
-        AdvancedModelBox.translateRotate(matrixStack);
+        AdvancedModelBox.translateAndRotate(matrixStack);
     }
 
     public static Vec3 matrixStackFromModel(Entity entity, float entityYaw, AdvancedModelBox modelRenderer) {
