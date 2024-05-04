@@ -47,7 +47,6 @@ public class LionfishAPI {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::setup);
         bus.addListener(this::setupClient);
-        PROXY.init();
         MinecraftForge.EVENT_BUS.register(this);
        // ModEntities.ENTITY_TYPE.register(bus);
     }
