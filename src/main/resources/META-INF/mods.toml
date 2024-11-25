@@ -3,7 +3,7 @@ loaderVersion="[47,)" #mandatory (26 is current forge version)
 license="All rights reserved"
 [[mods]] #mandatory
 modId="lionfishapi" #mandatory
-version="1.8" #mandatory
+version="2.6" #mandatory
 displayName="LionfishAPI" #mandatory
 description='''HELLO'''
 [[dependencies.lionfishapi]]
