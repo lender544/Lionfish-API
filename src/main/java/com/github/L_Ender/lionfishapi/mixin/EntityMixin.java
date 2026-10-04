@@ -25,6 +25,13 @@ import java.util.Map;
 
 @Mixin(Entity.class)
 public class EntityMixin{
+    @Unique
+    private static final double[][] lionfishapi$FLUID_OFFSETS = {
+            {0.5, 0, 0.5}, {0.5, 0, 0}, {0.5, -1, 0}, {0.5, 0, -0.5},
+            {0, 0, 0.5}, {0, 0, 0}, {0, -1, 0}, {0, 0, -0.5},
+            {-0.5, 0, 0.5}, {-0.5, 0, 0}, {-0.5, -1, 0}, {-0.5, 0, -0.5}
+    };
+
 
     @ModifyVariable(method = "move", ordinal = 1, index = 3, name = "vec32", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;collide(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"))
     public Vec3 fluidCollision(Vec3 original) {
@@ -36,18 +43,14 @@ public class EntityMixin{
 
         Level level = entity.getCommandSenderWorld();
 
-        double[][] offsets = {
-                {0.5, 0, 0.5}, {0.5, 0, 0}, {0.5, -1, 0}, {0.5, 0, -0.5},
-                {0, 0, 0.5}, {0, 0, 0}, {0, -1, 0}, {0, 0, -0.5},
-                {-0.5, 0, 0.5}, {-0.5, 0, 0}, {-0.5, -1, 0}, {-0.5, 0, -0.5}
-        };
 
         double highestValue = original.y;
         FluidState highestFluid = null;
 
-        for (double[] offset : offsets) {
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (double[] offset : lionfishapi$FLUID_OFFSETS) {
             BlockPos sourcePos = entity.blockPosition();
-            BlockPos pos = BlockPos.containing(sourcePos.getX() + offset[0], sourcePos.getY() + offset[1], sourcePos.getZ() + offset[2]);
+            pos.set(sourcePos.getX() + offset[0], sourcePos.getY() + offset[1], sourcePos.getZ() + offset[2]);
 
             FluidState fluidState = level.getFluidState(pos);
 
